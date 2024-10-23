@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from '@emotion/styled';
 import { columnsFromBackend } from './KanbanData';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
+import { ThemeContext } from '../context/ThemeContext'; // Importa el contexto de tema
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +13,8 @@ const TaskList = styled.div`
   min-height: 100px;
   display: flex;
   flex-direction: column;
-  background: #f3f3f3;
+  background: ${({ theme }) => (theme === 'light' ? '#f3f3f3' : '#2b2b2b')}; /* Cambiar según el tema */
+  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')}; /* Cambiar según el tema */
   min-width: 341px;
   border-radius: 5px;
   padding: 15px 15px;
@@ -35,6 +37,8 @@ const Title = styled.span`
 `;
 
 const Kanban = () => {
+  const { theme } = useContext(ThemeContext); // Obtener el tema actual
+
   const [columns, setColumns] = useState(columnsFromBackend);
 
   const onDragEnd = (result, columns, setColumns) => {
@@ -72,6 +76,7 @@ const Kanban = () => {
       });
     }
   };
+
   return (
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
@@ -85,10 +90,11 @@ const Kanban = () => {
                   <TaskList
                     ref={provided.innerRef}
                     {...provided.droppableProps}
+                    theme={theme} // Pasar el tema a TaskList
                   >
                     <Title>{column.title}</Title>
                     {column.items.map((item, index) => (
-                      <TaskCard key={item} item={item} index={index} />
+                      <TaskCard key={item.id} item={item} index={index} />
                     ))}
                     {provided.placeholder}
                   </TaskList>

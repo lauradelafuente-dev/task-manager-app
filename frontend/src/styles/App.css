@@ -1,22 +1,25 @@
 .task {
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: grab;
-  }
-  
-  .task:active {
-    cursor: grabbing;
-  }
-  
-  .droppable {
-    background-color: #e0e0e0;
-    padding: 20px;
-    min-height: 400px;
-  }
-  
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: var(--background-light); /* Usar la variable del tema */
+  color: var(--text-light); /* Usar la variable del tema */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: grab;
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+.droppable {
+  background-color: var(--background-light); /* Usar la variable del tema */
+  color: var(--text-light); /* Usar la variable del tema */
+  padding: 20px;
+  min-height: 400px;
+}
+
+/* Mantener las definiciones de las variables globales */
 :root {
   --background-light: #f0f0f0;
   --background-dark: #2b2b2b;
@@ -39,13 +42,13 @@ button {
   margin: 20px;
   border: none;
   border-radius: 5px;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--background-light); /* Variable para el botón */
+  color: var(--text-light); /* Variable para el botón */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--background-dark); /* Cambia el color al tema oscuro al hacer hover */
+  color: var(--text-dark); /* Color del texto también cambia */
 }

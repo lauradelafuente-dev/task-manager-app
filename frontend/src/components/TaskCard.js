@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react'; // Importa useEffect
 import { Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 import { ThemeContext } from '../context/ThemeContext';  // Importa el contexto
@@ -30,6 +30,11 @@ const TaskInformation = styled.div`
 
 const TaskCard = ({ item, index }) => {
   const { theme } = useContext(ThemeContext);  // Usa el contexto del tema
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--background-light', theme === 'light' ? '#fff' : '#333');
+    document.documentElement.style.setProperty('--text-light', theme === 'light' ? '#000' : '#fff');
+  }, [theme]);
 
   return (
     <Draggable key={item.id} draggableId={item.id} index={index}>

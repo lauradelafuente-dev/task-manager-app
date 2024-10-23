@@ -1,13 +1,12 @@
 import './styles/App.css';
 import Kanban from './components/Kanban';
-import { ThemeProvider } from './context/ThemeContext'; // Importa el ThemeProvider
-import ThemeToggleButton from './components/ThemeToggleButton'; // Importa el botón de cambio de tema
+import { ThemeProvider } from './context/ThemeContext'; // Asegúrate de que ThemeProvider esté correctamente importado
+import ThemeToggleButton from './components/ThemeToggleButton';
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider> {/* Envuelve toda tu app dentro del ThemeProvider */}
       <div className="App">
-        {/* Botón para alternar entre los temas */}
         <ThemeToggleButton />
         <Kanban />
       </div>
