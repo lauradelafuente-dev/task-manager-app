@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
-// import CustomAvatar from '../TableComponents/CustomAvatar'
-// import { ReactComponent as RedArrow } from '../../assets/icons/High.svg'
-// import { ReactComponent as YellowArrow } from '../../assets/icons/Medium.svg'
-// import { ReactComponent as BlueArrow } from '../../assets/icons/Low.svg'
+import { ThemeContext } from '../context/ThemeContext';  // Importa el contexto
 
 const TaskInformation = styled.div`
   display: flex;
@@ -15,9 +12,9 @@ const TaskInformation = styled.div`
   min-height: 106px;
   border-radius: 5px;
   max-width: 311px;
-  /* background: ${({ isDragging }) =>
-    isDragging ? 'rgba(255, 59, 59, 0.15)' : 'white'}; */
-  background: white;
+  background: ${({ isDragging, theme }) =>
+    isDragging ? (theme === 'light' ? 'rgba(255, 59, 59, 0.15)' : 'rgba(59, 59, 59, 0.15)') : theme === 'light' ? 'white' : '#333'};
+  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
   margin-top: 15px;
 
   .secondary-details {
@@ -26,31 +23,23 @@ const TaskInformation = styled.div`
     align-items: center;
     width: 100%;
     font-size: 12px;
-    font-weight: 400px;
-    color: #7d7d7d;
+    font-weight: 400;
+    color: ${({ theme }) => (theme === 'light' ? '#7d7d7d' : '#ccc')};
   }
-  /* .priority{ */
-  /* margin-right: 12px; */
-  /* align-self: center;
-    svg{
-      width: 12px !important;
-      height: 12px !important;
-      margin-right: 12px; */
-  /* margin-top: 2px; */
-  /* } */
-  /* } */
 `;
 
 const TaskCard = ({ item, index }) => {
+  const { theme } = useContext(ThemeContext);  // Usa el contexto del tema
+
   return (
     <Draggable key={item.id} draggableId={item.id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <TaskInformation>
+          <TaskInformation isDragging={snapshot.isDragging} theme={theme}>
             <p>{item.Task}</p>
             <div className="secondary-details">
               <p>
@@ -70,8 +59,3 @@ const TaskCard = ({ item, index }) => {
 };
 
 export default TaskCard;
-
-// <span className="priority">
-// {item.Priority === 'High' ? (<RedArrow />) : item.Priority === 'Medium' ? (<YellowArrow />) : (<BlueArrow />)}
-// </span>
-// <div><CustomAvatar name={item.Assignee} isTable={false} size={16} /></div>

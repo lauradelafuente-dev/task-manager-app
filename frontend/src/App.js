@@ -1,11 +1,14 @@
-import './styles/App.css';  // Asegúrate de usar la ruta correcta
-import Kanban from './components/Kanban';  // Ruta corregida
+import './styles/App.css';
+import Kanban from './components/Kanban';
+import { ThemeProvider } from './context/ThemeContext'; // Importa el ThemeProvider
 
 function App() {
   return (
-    <div className="App">
-      <Kanban />
-    </div>
+    <ThemeProvider>
+      <div className="App">
+        <Kanban />
+      </div>
+    </ThemeProvider>
   );
 }
 
