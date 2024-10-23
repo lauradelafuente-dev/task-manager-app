@@ -22,18 +22,18 @@
 }
 
 :root {
-  --background-light: #f0f0f0;
-  --background-dark: #2b2b2b;
-  --text-light: #000;
-  --text-dark: #fff;
-  --card-background-light: #fff;
-  --card-background-dark: #333;
-  --column-background-light: #e0e0e0;
-  --column-background-dark: #444;
+  --background-light: #f0f0f0; /* Fondo claro */
+  --background-dark: #353535; /* Fondo oscuro */
+  --text-light: #000; /* Texto en tema claro */
+  --text-dark: #fff; /* Texto en tema oscuro */
+  --card-background-light: #ffffff; /* Fondo claro para tarjetas */
+  --card-background-dark: #444444; /* Fondo oscuro para tarjetas */
+  --column-background-light: #e0e0e0; /* Fondo claro para columnas */
+  --column-background-dark: #3a3a3a; /* Fondo oscuro para columnas */
 }
 
 body {
-  transition: background-color 0.8s ease, color 0.8s ease; /* Transición para el body */
+  transition: background-color 0.8s ease, color 0.8s ease; /* Transición suave para el fondo del body */
 }
 
 body.light {

@@ -1,9 +1,10 @@
+// ThemeContext.js
 import { createContext, useState, useEffect } from 'react';
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark'); // 'light' por defecto
+  const [theme, setTheme] = useState('light'); // Tema por defecto 'light'
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -12,10 +13,13 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    document.body.className = theme; // Aplica la clase 'light' o 'dark' al body
+    localStorage.setItem('theme', theme); // Guarda el tema seleccionado
+  }, [theme]);
+
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (
