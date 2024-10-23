@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'; // Importa useEffect
+import React, { useContext, useEffect } from 'react'; 
 import { Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
-import { ThemeContext } from '../context/ThemeContext';  // Importa el contexto
+import { ThemeContext } from '../context/ThemeContext'; 
 
 const TaskInformation = styled.div`
   display: flex;
@@ -16,7 +16,8 @@ const TaskInformation = styled.div`
     isDragging ? (theme === 'light' ? 'rgba(255, 59, 59, 0.15)' : 'rgba(59, 59, 59, 0.15)') : theme === 'light' ? 'white' : '#333'};
   color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
   margin-top: 15px;
-
+  transition: background-color 0.5s ease, color 0.5s ease; /* Transición añadida */
+  
   .secondary-details {
     display: flex;
     justify-content: space-between;
@@ -25,11 +26,12 @@ const TaskInformation = styled.div`
     font-size: 12px;
     font-weight: 400;
     color: ${({ theme }) => (theme === 'light' ? '#7d7d7d' : '#ccc')};
+    transition: color 0.5s ease; /* Transición añadida */
   }
 `;
 
 const TaskCard = ({ item, index }) => {
-  const { theme } = useContext(ThemeContext);  // Usa el contexto del tema
+  const { theme } = useContext(ThemeContext); 
 
   useEffect(() => {
     document.documentElement.style.setProperty('--background-light', theme === 'light' ? '#fff' : '#333');

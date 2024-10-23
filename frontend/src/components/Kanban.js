@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { columnsFromBackend } from './KanbanData';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
-import { ThemeContext } from '../context/ThemeContext'; // Importa el contexto de tema
+import { ThemeContext } from '../context/ThemeContext';
 
 const Container = styled.div`
   display: flex;
@@ -14,11 +14,12 @@ const TaskList = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => (theme === 'light' ? '#f3f3f3' : '#2b2b2b')}; /* Cambiar según el tema */
-  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')}; /* Cambiar según el tema */
+  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')}; 
   min-width: 341px;
   border-radius: 5px;
   padding: 15px 15px;
   margin-right: 45px;
+  transition: background-color 0.5s ease, color 0.5s ease; /* Transición añadida */
 `;
 
 const TaskColumnStyles = styled.div`
@@ -34,10 +35,11 @@ const Title = styled.span`
   padding: 2px 10px;
   border-radius: 5px;
   align-self: flex-start;
+  transition: color 0.5s ease, background-color 0.5s ease; /* Transición añadida */
 `;
 
 const Kanban = () => {
-  const { theme } = useContext(ThemeContext); // Obtener el tema actual
+  const { theme } = useContext(ThemeContext); 
 
   const [columns, setColumns] = useState(columnsFromBackend);
 

@@ -1,11 +1,12 @@
 .task {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: var(--background-light); /* Usar la variable del tema */
-  color: var(--text-light); /* Usar la variable del tema */
+  background-color: var(--background-light); /* Usar variable para tema claro/oscuro */
+  color: var(--text-light); /* Usar variable para el color del texto */
   border: 1px solid #ddd;
   border-radius: 4px;
   cursor: grab;
+  transition: background-color 0.5s ease, color 0.5s ease; /* Transición para fondo y texto */
 }
 
 .task:active {
@@ -13,18 +14,26 @@
 }
 
 .droppable {
-  background-color: var(--background-light); /* Usar la variable del tema */
-  color: var(--text-light); /* Usar la variable del tema */
+  background-color: var(--background-light); /* Usar variable para tema claro/oscuro */
+  color: var(--text-light); /* Usar variable para el color del texto */
   padding: 20px;
   min-height: 400px;
+  transition: background-color 0.5s ease, color 0.5s ease; /* Transición para fondo y texto */
 }
 
-/* Mantener las definiciones de las variables globales */
 :root {
   --background-light: #f0f0f0;
   --background-dark: #2b2b2b;
   --text-light: #000;
   --text-dark: #fff;
+  --card-background-light: #fff;
+  --card-background-dark: #333;
+  --column-background-light: #e0e0e0;
+  --column-background-dark: #444;
+}
+
+body {
+  transition: background-color 0.8s ease, color 0.8s ease; /* Transición para el body */
 }
 
 body.light {
@@ -42,31 +51,49 @@ button {
   margin: 20px;
   border: none;
   border-radius: 5px;
-  background-color: var(--background-light); /* Variable para el botón */
-  color: var(--text-light); /* Variable para el botón */
+  background-color: var(--background-light); /* Cambio dinámico del tema */
+  color: var(--text-light); /* Cambio dinámico del color del texto */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición para ambos */
 }
 
 button:hover {
-  background-color: var(--background-dark); /* Cambia el color al tema oscuro al hacer hover */
-  color: var(--text-dark); /* Color del texto también cambia */
+  background-color: var(--background-dark); /* Cambia el color al hacer hover */
+  color: var(--text-dark); /* Cambia el color del texto */
 }
 
 .theme-toggle-button {
-  position: fixed; /* Posición fija */
-  top: 20px; /* Distancia desde la parte superior */
-  right: 20px; /* Distancia desde la derecha */
+  position: fixed;
+  top: 20px;
+  right: 20px;
   padding: 10px 15px;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para un efecto más discreto */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
   color: white;
   border: none;
-  border-radius: 50%; /* Botón redondeado */
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Suave transición al hacer hover */
+  transition: background-color 0.3s ease;
 }
 
 .theme-toggle-button:hover {
   background-color: rgba(255, 255, 255, 0.5); /* Cambio de fondo al hacer hover */
   color: black;
+}
+
+.card {
+  background-color: var(--card-background-light); /* Color de fondo de las tarjetas */
+  transition: background-color 0.5s ease; /* Transición suave para las tarjetas */
+}
+
+body.dark .card {
+  background-color: var(--card-background-dark); /* Fondo oscuro para las tarjetas en modo oscuro */
+}
+
+.column {
+  background-color: var(--column-background-light); /* Color de fondo de las columnas */
+  transition: background-color 0.5s ease; /* Transición suave para las columnas */
+}
+
+body.dark .column {
+  background-color: var(--column-background-dark); /* Fondo oscuro para las columnas en modo oscuro */
 }
