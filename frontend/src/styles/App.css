@@ -52,3 +52,21 @@ button:hover {
   background-color: var(--background-dark); /* Cambia el color al tema oscuro al hacer hover */
   color: var(--text-dark); /* Color del texto también cambia */
 }
+
+.theme-toggle-button {
+  position: fixed; /* Posición fija */
+  top: 20px; /* Distancia desde la parte superior */
+  right: 20px; /* Distancia desde la derecha */
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para un efecto más discreto */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Botón redondeado */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Suave transición al hacer hover */
+}
+
+.theme-toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Cambio de fondo al hacer hover */
+  color: black;
+}
