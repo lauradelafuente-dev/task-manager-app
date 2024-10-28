@@ -1,14 +1,21 @@
 import './styles/App.css';
 import Kanban from './components/Kanban';
-import { ThemeProvider } from './context/ThemeContext'; // Asegúrate de que ThemeProvider esté correctamente importado
+import { ThemeProvider } from './context/ThemeContext';
 import ThemeToggleButton from './components/ThemeToggleButton';
+import { useState } from 'react';
+import { columnsFromBackend } from './components/KanbanData';
 
 function App() {
+  const [columns, setColumns] = useState(columnsFromBackend);  // Inicializa con las columnas
+
   return (
-    <ThemeProvider> {/* Envuelve toda tu app dentro del ThemeProvider */}
+    <ThemeProvider>
       <div className="App">
+        {/* Botón para alternar el tema */}
         <ThemeToggleButton />
-        <Kanban />
+        
+        {/* El tablero Kanban */}
+        <Kanban columns={columns} setColumns={setColumns} />
       </div>
     </ThemeProvider>
   );

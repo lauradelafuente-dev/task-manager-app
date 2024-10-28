@@ -4,6 +4,7 @@ import { columnsFromBackend } from './KanbanData';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
 import { ThemeContext } from '../context/ThemeContext';
+import AddTaskForm from './AddTaskForm'; // Import the form
 
 const Container = styled.div`
   display: flex;
@@ -13,13 +14,14 @@ const TaskList = styled.div`
   min-height: 100px;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => (theme === 'light' ? '#f3f3f3' : '#2b2b2b')}; /* Cambiar según el tema */
-  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')}; 
+  background-color: ${({ theme }) => (theme === 'light' ? '#e0e0e0' : '#333')};
+  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
   min-width: 341px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 15px 15px;
   margin-right: 45px;
-  transition: background-color 0.5s ease, color 0.5s ease; /* Transición añadida */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.5s ease, color 0.5s ease;
 `;
 
 const TaskColumnStyles = styled.div`
@@ -35,11 +37,11 @@ const Title = styled.span`
   padding: 2px 10px;
   border-radius: 5px;
   align-self: flex-start;
-  transition: color 0.5s ease, background-color 0.5s ease; /* Transición añadida */
+  transition: color 0.5s ease, background-color 0.5s ease;
 `;
 
 const Kanban = () => {
-  const { theme } = useContext(ThemeContext); 
+  const { theme } = useContext(ThemeContext);
 
   const [columns, setColumns] = useState(columnsFromBackend);
 
@@ -79,11 +81,25 @@ const Kanban = () => {
     }
   };
 
+  // Function to add a new task to the "To-do" column
+  const handleAddTask = (newTask) => {
+    const updatedColumns = {
+      ...columns,
+      // Add the new task to the "To-do" column's items array
+      [Object.keys(columns)[0]]: {
+        ...columns[Object.keys(columns)[0]],
+        items: [...columns[Object.keys(columns)[0]].items, newTask],
+      },
+    };
+    setColumns(updatedColumns);
+  };
+
   return (
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
     >
       <Container>
+        <AddTaskForm onAddTask={handleAddTask} /> {/* Add the form component */}
         <TaskColumnStyles>
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
@@ -92,7 +108,7 @@ const Kanban = () => {
                   <TaskList
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    theme={theme} // Pasar el tema a TaskList
+                    theme={theme} 
                   >
                     <Title>{column.title}</Title>
                     {column.items.map((item, index) => (

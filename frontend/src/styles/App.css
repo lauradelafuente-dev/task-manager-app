@@ -1,44 +1,32 @@
-.task {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: var(--background-light); /* Usar variable para tema claro/oscuro */
-  color: var(--text-light); /* Usar variable para el color del texto */
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: grab;
-  transition: background-color 0.5s ease, color 0.5s ease; /* Transición para fondo y texto */
-}
-
-.task:active {
-  cursor: grabbing;
-}
-
-.droppable {
-  background-color: var(--background-light); /* Usar variable para tema claro/oscuro */
-  color: var(--text-light); /* Usar variable para el color del texto */
-  padding: 20px;
-  min-height: 400px;
-  transition: background-color 0.5s ease, color 0.5s ease; /* Transición para fondo y texto */
-}
-
+/* Variables para los colores */
 :root {
-  --background-light: #f0f0f0; /* Fondo claro */
-  --background-dark: #353535; /* Fondo oscuro */
-  --text-light: #000; /* Texto en tema claro */
-  --text-dark: #fff; /* Texto en tema oscuro */
-  --card-background-light: #ffffff; /* Fondo claro para tarjetas */
-  --card-background-dark: #444444; /* Fondo oscuro para tarjetas */
-  --column-background-light: #e0e0e0; /* Fondo claro para columnas */
-  --column-background-dark: #3a3a3a; /* Fondo oscuro para columnas */
+  --background-light: #f9f9f9;
+  --background-dark: #1e1e1e;
+  --text-light: #333;
+  --text-dark: #e0e0e0;
+  --card-background-light: #ffffff;
+  --card-background-dark: #2b2b2b;
+  --column-background-light: #e0e0e0;
+  --column-background-dark: #333;
+  --input-bg-light: #ffffff;
+  --input-bg-dark: #333;
+  --input-color-light: #333;
+  --input-color-dark: #e0e0e0;
+  --input-border-light: #ccc;
+  --input-border-dark: #555;
+  --submit-bg-light: #4caf50;
+  --submit-bg-dark: #10957d;
+  --submit-color-light: #fff;
+  --submit-color-dark: #fff;
+  --toggle-bg-light: rgba(255, 255, 255, 0.8);
+  --toggle-bg-dark: rgba(0, 0, 0, 0.5);
 }
 
+/* Estilos generales */
 body {
-  transition: background-color 0.8s ease, color 0.8s ease; /* Transición suave para el fondo del body */
-}
-
-body.light {
   background-color: var(--background-light);
   color: var(--text-light);
+  transition: background-color 0.8s ease, color 0.8s ease;
 }
 
 body.dark {
@@ -46,54 +34,102 @@ body.dark {
   color: var(--text-dark);
 }
 
+/* Botones */
 button {
   padding: 10px 20px;
-  margin: 20px;
   border: none;
   border-radius: 5px;
-  background-color: var(--background-light); /* Cambio dinámico del tema */
-  color: var(--text-light); /* Cambio dinámico del color del texto */
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transición para ambos */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
-  background-color: var(--background-dark); /* Cambia el color al hacer hover */
-  color: var(--text-dark); /* Cambia el color del texto */
+  background-color: var(--background-dark);
+  color: var(--text-dark);
 }
 
+button[type="submit"] {
+  background-color: var(--submit-bg-dark);
+  color: var(--submit-color-dark);
+}
+
+body.light button[type="submit"] {
+  background-color: var(--submit-bg-light);
+  color: var(--submit-color-light);
+}
+
+/* Botón de cambio de tema */
 .theme-toggle-button {
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 10px 15px;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-  color: white;
-  border: none;
+  padding: 8px;
+  background-color: var(--toggle-bg-dark);
+  color: #fff;
   border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+body.light .theme-toggle-button {
+  background-color: var(--toggle-bg-light);
+  color: #333;
 }
 
 .theme-toggle-button:hover {
-  background-color: rgba(255, 255, 255, 0.5); /* Cambio de fondo al hacer hover */
-  color: black;
+  transform: rotate(20deg);
 }
 
+/* Tarjetas */
 .card {
-  background-color: var(--card-background-light); /* Color de fondo de las tarjetas */
-  transition: background-color 0.5s ease; /* Transición suave para las tarjetas */
+  background-color: var(--card-background-light);
+  color: var(--text-light);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.3s ease;
 }
 
 body.dark .card {
-  background-color: var(--card-background-dark); /* Fondo oscuro para las tarjetas en modo oscuro */
+  background-color: var(--card-background-dark);
+  color: var(--text-dark);
 }
 
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Columnas */
 .column {
-  background-color: var(--column-background-light); /* Color de fondo de las columnas */
-  transition: background-color 0.5s ease; /* Transición suave para las columnas */
+  background-color: var(--column-background-light);
+  border-radius: 10px;
+  padding: 20px;
+  transition: background-color 0.5s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 body.dark .column {
-  background-color: var(--column-background-dark); /* Fondo oscuro para las columnas en modo oscuro */
+  background-color: var(--column-background-dark);
+}
+
+/* Campo de entrada */
+form input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-dark);
+  background-color: var(--input-bg-dark);
+  color: var(--input-color-dark);
+  margin-right: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.light form input[type="text"] {
+  background-color: var(--input-bg-light);
+  color: var(--input-color-light);
+  border-color: var(--input-border-light);
+}
+
+form input[type="text"]:focus {
+  border-color: #10957d;
+  outline: none;
 }

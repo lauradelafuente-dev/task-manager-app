@@ -8,16 +8,27 @@ const TaskInformation = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 15px;
+  padding: 12px 15px;
   min-height: 106px;
-  border-radius: 5px;
+  border-radius: 8px;
   max-width: 311px;
   background: ${({ isDragging, theme }) =>
-    isDragging ? (theme === 'light' ? 'rgba(255, 59, 59, 0.15)' : 'rgba(59, 59, 59, 0.15)') : theme === 'light' ? 'white' : '#333'};
-  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
+    isDragging
+      ? theme === 'light'
+        ? 'rgba(255, 59, 59, 0.15)'
+        : 'rgba(59, 59, 59, 0.15)'
+      : theme === 'light'
+      ? '#ffffff'
+      : '#2b2b2b'};
+  color: ${({ theme }) => (theme === 'light' ? '#333' : '#fff')};
   margin-top: 15px;
-  transition: background-color 0.5s ease, color 0.5s ease; /* Transición añadida */
-  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
   .secondary-details {
     display: flex;
     justify-content: space-between;
@@ -26,7 +37,7 @@ const TaskInformation = styled.div`
     font-size: 12px;
     font-weight: 400;
     color: ${({ theme }) => (theme === 'light' ? '#7d7d7d' : '#ccc')};
-    transition: color 0.5s ease; /* Transición añadida */
+    transition: color 0.5s ease;
   }
 `;
 
@@ -34,8 +45,14 @@ const TaskCard = ({ item, index }) => {
   const { theme } = useContext(ThemeContext); 
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--background-light', theme === 'light' ? '#fff' : '#333');
-    document.documentElement.style.setProperty('--text-light', theme === 'light' ? '#000' : '#fff');
+    document.documentElement.style.setProperty(
+      '--background-light',
+      theme === 'light' ? '#fff' : '#333'
+    );
+    document.documentElement.style.setProperty(
+      '--text-light',
+      theme === 'light' ? '#000' : '#fff'
+    );
   }, [theme]);
 
   return (
