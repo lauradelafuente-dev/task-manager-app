@@ -14,12 +14,13 @@ const TaskList = styled.div`
   min-height: 100px;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => (theme === 'light' ? '#f3f3f3' : '#2b2b2b')};
-  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')}; 
+  background-color: ${({ theme }) => (theme === 'light' ? '#e0e0e0' : '#333')};
+  color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
   min-width: 341px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 15px 15px;
   margin-right: 45px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.5s ease, color 0.5s ease;
 `;
 
